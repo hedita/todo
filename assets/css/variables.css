@@ -1,0 +1,34 @@
+:root {
+  /* font */
+  --primary-font: "open-sans";
+  --thin-font: 0.5em;
+  --normal-font: 1em;
+  --bold-font: 1.5em;
+  --bolder-font: 3em;
+  
+  /* spacing */
+  --spacing: 8px;
+  --spacing-xsmall: calc(var(--spacing));
+  --spacing-small: calc(var(--spacing) * 2);
+  --spacing-large: calc(var(--spacing) * 3);
+  --spacing-xlarge: calc(var(--spacing) * 4);
+  --spacing-xxlarge: calc(var(--spacing) * 5);
+
+  /* sizing */
+  --sizing: 10px;
+  --sizing-xsmall: calc(var(--sizing));
+  --sizing-small: calc(var(--sizing) * 2);
+  --sizing-large: calc(var(--sizing) * 3);
+  --sizing-xlarge: calc(var(--sizing) * 4);
+
+  /* colors */
+  --primary-color: #1B2638;
+  --secondary-color:#E95420;
+  --tertiary-color: #CA0A0A;
+  --quaternary-color: #6C86AC;
+  --fifth-color: #F1F1F1;
+  --sixth-color: #ffffff;
+
+  /* border */
+  --border: 2px solid var(--quaternary-color);
+}

@@ -30,5 +30,6 @@
   --sixth-color: #ffffff;
 
   /* border */
-  --border: 2px solid var(--quaternary-color);
+  --primary-border: 50px solid var(--fifth-color);
+  --secondary-border: 2px solid var(--quaternary-color);
 }

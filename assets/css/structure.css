@@ -14,7 +14,8 @@ body {
   background-color: var(--sixth-color);
   display: grid;
   place-items: center;
-  border-radius: var(--sizing-xsmall);
+  border: var(--primary-border);
+  border-radius: var(--sizing-small);
 }
 
 .title {
@@ -35,7 +36,7 @@ body {
 
 .todo-item {
   width: 350px;
-  border: var(--border);
+  border: var(--secondary-border);
   border-radius: var(--sizing-xsmall);
   padding: var(--spacing-small);
   margin: var(--spacing-small);

@@ -61,5 +61,9 @@ input {
 .fa-solid {
   color: var(--quaternary-color);
   font-size: var(--bold-font);
+  visibility: hidden;
+}
 
+.todo-item-add:hover .fa-solid{
+  visibility: visible;
 }

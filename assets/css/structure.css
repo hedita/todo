@@ -1,4 +1,5 @@
 body {
+  font-family: var(--primary-font);
   background-color: var(--primary-color);
   place-items: center;
 }
@@ -34,6 +35,16 @@ body {
   padding: var(--spacing-xxlarge);
 }
 
+.todo-item-add {
+  width: 350px;
+  border: var(--secondary-border);
+  border-radius: var(--sizing-xsmall);
+  padding: var(--spacing-small);
+  margin: var(--spacing-small);
+  display: flex;
+  justify-content: space-between;
+}
+
 .todo-item {
   width: 350px;
   border: var(--secondary-border);
@@ -44,4 +55,11 @@ body {
 
 input {
   accent-color:var(--secondary-color);
+  border: none;
+}
+
+.fa-solid {
+  color: var(--quaternary-color);
+  font-size: var(--bold-font);
+
 }

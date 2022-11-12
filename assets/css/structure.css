@@ -46,7 +46,8 @@ body {
   border: var(--secondary-border);
   border-radius: var(--sizing-xsmall);
   padding: var(--spacing-small);
-  margin: var(--spacing-small);
+  margin: var(--spacing-small); 
+  display: flex;
 }
 
 input {
@@ -60,11 +61,14 @@ input {
 
 .fa-pen-to-square {
   visibility: hidden;
+  margin-left: auto;
+  padding: var(--spacing-xsmall);
 }
 
 .fa-xmark {
   visibility: hidden;
   color: red;
+  padding: var(--spacing-xsmall);
 }
 
 .todo-item:hover .fa-pen-to-square {
@@ -78,4 +82,8 @@ input {
 .container {
   min-height: 100vh;
   background-color: var(--sixth-color);
+}
+
+.todo {
+  padding: var(--spacing-xsmall);
 }

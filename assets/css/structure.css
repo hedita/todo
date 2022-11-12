@@ -50,8 +50,8 @@ body {
   border-radius: var(--sizing-xsmall);
   padding: var(--spacing-small);
   margin: var(--spacing-small);
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
 }
 
 input {

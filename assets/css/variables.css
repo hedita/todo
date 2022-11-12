@@ -1,6 +1,6 @@
 :root {
   /* font */
-  --primary-font: "open-sans";
+  --font-family: 'Roboto', sans-serif;
   --thin-font: 0.5em;
   --normal-font: 1em;
   --bold-font: 1.5em;
@@ -30,6 +30,5 @@
   --sixth-color: #ffffff;
 
   /* border */
-  --primary-border: 50px solid var(--fifth-color);
   --secondary-border: 2px solid var(--quaternary-color);
 }

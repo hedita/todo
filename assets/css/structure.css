@@ -34,7 +34,6 @@ body {
 }
 
 .todo-item-add {
-  width: 350px;
   border: var(--secondary-border);
   border-radius: var(--sizing-xsmall);
   padding: var(--spacing-small);
@@ -44,13 +43,10 @@ body {
 }
 
 .todo-item {
-  width: 350px;
   border: var(--secondary-border);
   border-radius: var(--sizing-xsmall);
   padding: var(--spacing-small);
   margin: var(--spacing-small);
-  display: grid;
-  grid-template-columns: 1fr auto auto;
 }
 
 input {

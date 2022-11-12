@@ -1,7 +1,6 @@
 body {
   font-family: var(--font-family);
   background-color: var(--primary-color);
-  place-items: center;
 }
 
 .site-wrapper {
@@ -78,4 +77,9 @@ input {
 
 .todo-item:hover .fa-xmark{
   visibility: visible;
+}
+
+.container {
+  min-height: 100vh;
+  background-color: var(--sixth-color);
 }

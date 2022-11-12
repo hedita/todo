@@ -1,0 +1,22 @@
+{
+  "name": "todo-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hedita/todo.git"
+  },
+  "author": "hedita",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hedita/todo/issues"
+  },
+  "homepage": "https://github.com/hedita/todo#readme",
+  "dependencies": {
+    "yarn": "^1.22.19"
+  }
+}

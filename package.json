@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/hedita/todo/issues"
   },
-  "homepage": "https://github.com/hedita/todo#readme"
+  "homepage": "https://github.com/hedita/todo#readme",
+  "dependencies": {
+    "yarn": "^1.22.19"
+  }
 }

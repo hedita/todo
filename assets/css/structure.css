@@ -62,13 +62,12 @@ input {
 .fa-pen-to-square {
   visibility: hidden;
   margin-left: auto;
-  padding: var(--spacing-xsmall);
+  padding-right: var(--spacing-small);
 }
 
 .fa-xmark {
   visibility: hidden;
-  color: red;
-  padding: var(--spacing-xsmall);
+  color: #e50202;
 }
 
 .todo-item:hover .fa-pen-to-square {
@@ -85,5 +84,5 @@ input {
 }
 
 .todo {
-  padding: var(--spacing-xsmall);
+  padding-left: var(--spacing-xsmall);
 }

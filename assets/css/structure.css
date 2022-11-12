@@ -55,26 +55,27 @@ input {
   border: none;
 }
 
-.fa-solid {
+.add-icon {
   color: var(--quaternary-color);
 }
 
-.fa-pen-to-square {
+.edite-icon {
   visibility: hidden;
   margin-left: auto;
   padding-right: var(--spacing-small);
+  color: var(--quaternary-color);
 }
 
-.fa-xmark {
+.remove-icon {
   visibility: hidden;
-  color: #e50202;
+  color: var(--tertiary-color);
 }
 
-.todo-item:hover .fa-pen-to-square {
+.todo-item:hover .edite-icon {
   visibility: visible;
 }
 
-.todo-item:hover .fa-xmark{
+.todo-item:hover .remove-icon {
   visibility: visible;
 }
 

@@ -3,7 +3,7 @@ const addTaskInput = document.getElementById("input");
 const errorMessage = document.getElementById("error-message")
 const backendErrorMessage = document.getElementById("backend-error-message");
 
-async function postTodo() {
+async function postTodo(todoText) {
   const url = "http://localhost:3030/todos";
   
   try {
@@ -12,7 +12,7 @@ async function postTodo() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({text: addTaskInput.value})
+      body: JSON.stringify({text: todoText})
     });
     if (response.status === 400) {
       errorMessage.innerText = "Something went wrong!";
@@ -24,7 +24,7 @@ async function postTodo() {
 }
 
 addTaskIcon.addEventListener("click", function() {
-  postTodo();
+  postTodo(addTaskInput.value);
   clearAddTodoInput();
 })
 

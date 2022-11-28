@@ -25,12 +25,13 @@ body {
 
 .filter-list {
   display: grid;
+  padding: var(--spacing-small);
   grid-template-columns: auto auto auto;
+  justify-content: space-between;
 }
 
 .filter-item {
   color: var(--primary-color);
-  padding: var(--spacing-xxlarge);
 }
 
 .todo-item-add {

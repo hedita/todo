@@ -1,6 +1,7 @@
-const addIcon = document.getElementById("add-icon");
-const input = document.getElementById("input");
-const errorHandling = document.getElementById("error-handling")
+const addTaskIcon = document.getElementById("add-icon");
+const addTaskInput = document.getElementById("input");
+const errorMessage = document.getElementById("error-message")
+const backendErrorMessage = document.getElementById("backend-error-message");
 
 async function postTodo() {
   const url = "http://localhost:3030/todos";
@@ -11,29 +12,29 @@ async function postTodo() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({text: input.value})
+      body: JSON.stringify({text: addTaskInput.value})
     });
-    if (response.status != 200) {
-      errorHandling.innerText = "Something went wrong!";
+    if (response.status === 400) {
+      errorMessage.innerText = "Something went wrong!";
     }
   }
-  catch (error) {
-    errorHandling.innerText = "Something went wrong!";
+  catch(error) {
+    backendErrorMessage.innerText = error.message;
   }
 }
 
-addIcon.addEventListener("click", function() {
-  postTodo(input.value);
-  clearInput();
+addTaskIcon.addEventListener("click", function() {
+  postTodo();
+  clearAddTodoInput();
 })
 
 input.addEventListener("keydown",(e) => {
   if (e.key == "Enter") {
-  postTodo(input.value);
-  clearInput();
+    postTodo(addTaskInput.value);
+    clearAddTodoInput();
   }
 });
 
-function clearInput() {
-  input.value = "";
+function clearAddTodoInput() {
+  addTaskInput.value = "";
 }

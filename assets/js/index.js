@@ -15,7 +15,7 @@ async function postTodo(todoText) {
       body: JSON.stringify({ text: todoText }),
     });
     const {error} = await response.json();
-    if (response.status != 201) {
+    if (response.status !== 201) {
       errorMessage.innerText = error;
     }
   } catch (error) {
@@ -26,19 +26,22 @@ async function postTodo(todoText) {
 addTaskIcon.addEventListener("click", function () {
   postTodo(addTaskInput.value);
   clearAddTodoInput();
-  errorMessage.innerText = "";
-  backendErrorMessage.innerText = "";
+  resetErrorMessage();
 });
 
 addTaskInput.addEventListener("keydown", (e) => {
-  if (e.key == "Enter") {
+  if (e.key === "Enter") {
     postTodo(addTaskInput.value);
     clearAddTodoInput();
-    errorMessage.innerText = "";
-    backendErrorMessage.innerText = "";
+    resetErrorMessage();
   }
 });
 
 function clearAddTodoInput() {
   addTaskInput.value = "";
+}
+
+function resetErrorMessage() {
+  errorMessage.innerText = "";
+  backendErrorMessage.innerText = "";
 }

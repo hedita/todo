@@ -26,14 +26,14 @@ async function postTodo(todoText) {
 addTaskIcon.addEventListener("click", function () {
   postTodo(addTaskInput.value);
   clearAddTodoInput();
-  resetErrorMessage();
+  clearErrorMessage();
 });
 
 addTaskInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     postTodo(addTaskInput.value);
     clearAddTodoInput();
-    resetErrorMessage();
+    clearErrorMessage();
   }
 });
 
@@ -41,7 +41,7 @@ function clearAddTodoInput() {
   addTaskInput.value = "";
 }
 
-function resetErrorMessage() {
+function clearErrorMessage() {
   errorMessage.innerText = "";
   backendErrorMessage.innerText = "";
 }

@@ -27,7 +27,7 @@ addTaskIcon.addEventListener("click", function () {
   clearAddTodoInput();
 });
 
-input.addEventListener("keydown", (e) => {
+addTaskInput.addEventListener("keydown", (e) => {
   if (e.key == "Enter") {
     postTodo(addTaskInput.value);
     clearAddTodoInput();

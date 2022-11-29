@@ -25,12 +25,13 @@ body {
 
 .filter-list {
   display: grid;
+  padding: var(--spacing-small);
   grid-template-columns: auto auto auto;
+  justify-content: space-between;
 }
 
 .filter-item {
   color: var(--primary-color);
-  padding: var(--spacing-xxlarge);
 }
 
 .todo-item-add {
@@ -86,4 +87,16 @@ input {
 
 .todo {
   padding-left: var(--spacing-xsmall);
+}
+
+.error-message {
+  padding-top: var(--spacing-large);
+  color: var(--tertiary-color);
+  font-weight: bold;
+}
+
+.backend-error-message {
+  color: var(--tertiary-color);
+  font-weight: bold;
+  text-align: center;
 }

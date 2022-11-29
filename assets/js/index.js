@@ -14,11 +14,11 @@ async function postTodo(todoText) {
       },
       body: JSON.stringify({ text: todoText }),
     });
-    if (response.status === 400) {
-      errorMessage.innerText = "Something went wrong!";
+    if (response.status !=  200 && response.status != 201) {
+      errorMessage.innerText = response.statusText;
     }
   } catch (error) {
-    backendErrorMessage.innerText = error.message;
+    backendErrorMessage.innerText = "Something went wrong!";
   }
 }
 

@@ -66,6 +66,7 @@ async function getTasks() {
     backendErrorMessage.innerText = "Something went wrong!";
   }
 }
+
 const tasks = getTasks();
 
 function changeDateFormat(createdAt) {
@@ -76,6 +77,7 @@ function changeDateFormat(createdAt) {
 
   return `${day} ${month} ${year}`;
 }
+
 function showTasks(tasks) {
   let listHtml = "";
   tasks.forEach(({text, createdAt}) => {

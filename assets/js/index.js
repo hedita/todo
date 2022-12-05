@@ -3,6 +3,8 @@ const addTaskInput = document.getElementById("add-task-input");
 const errorMessage = document.getElementById("error-message");
 const backendErrorMessage = document.getElementById("backend-error-message");
 const todoList = document.getElementById("todo-list");
+const filterItemAll = document.getElementById("filter-item-all");
+const filterItemUncompleted = document.getElementById("filter-item-uncompleted");
 const url = "http://localhost:3030/todos";
 
 async function postTodo(todoText) {
@@ -30,6 +32,8 @@ addTaskIcon.addEventListener("click", async function () {
   clearErrorMessage();
   const tasks = await getTasks();
   showTasks(tasks);
+  filterItemAll.innerText = tasks.length;
+  filterItemUncompleted.innerText = tasks.length;
 });
 
 addTaskInput.addEventListener("keydown", async (e) => {
@@ -39,6 +43,8 @@ addTaskInput.addEventListener("keydown", async (e) => {
     clearErrorMessage();
     const tasks = await getTasks();
     showTasks(tasks);
+    filterItemAll.innerText = tasks.length;
+    filterItemUncompleted.innerText = tasks.length;
   }
 });
 
@@ -61,15 +67,18 @@ async function getTasks() {
   }
 }
 const tasks = getTasks();
-console.log(tasks)
 
 function showTasks(tasks) {
   let listHtml = "";
 
   tasks.forEach(({text}) => {
     console.log(text)
-    listHtml += `<li class="todo-item id="todo-item">
-    <p class="todo">${text}</p></li>`
+    listHtml += ` <li class="todo-item">
+    <input type="checkbox" />
+    <p class="todo">${text}</p>
+    <i class="fa-solid fa-pen-to-square edite-icon"></i>
+    <i class="fa-solid fa-xmark remove-icon"></i>
+  </li>`
   });
   todoList.innerHTML = listHtml;
 }

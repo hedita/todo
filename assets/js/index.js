@@ -68,14 +68,20 @@ async function getTasks() {
 }
 const tasks = getTasks();
 
+function changeDateFormat(createdAt) {
+  const dateTime = new Date(createdAt);
+  const year = dateTime.toLocaleDateString("en-US", { year: "numeric" });
+  const month = dateTime.toLocaleDateString("en-US", { month: "short" });
+  const day = dateTime.toLocaleDateString("en-US", { day: "numeric" });
+
+  return `${day} ${month} ${year}`;
+}
 function showTasks(tasks) {
   let listHtml = "";
-
-  tasks.forEach(({text}) => {
-    console.log(text)
+  tasks.forEach(({text, createdAt}) => {
     listHtml += ` <li class="todo-item">
     <input type="checkbox" />
-    <p class="todo">${text}</p>
+    <p class="todo"  title="${changeDateFormat(createdAt)}">${text}</p>
     <i class="fa-solid fa-pen-to-square edite-icon"></i>
     <i class="fa-solid fa-xmark remove-icon"></i>
   </li>`

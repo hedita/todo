@@ -66,8 +66,18 @@ async function getTasks() {
     backendErrorMessage.innerText = "Something went wrong!";
   }
 }
+const tasks = sortTasks(await getTasks());
+console.log(tasks)
 
-const tasks = getTasks();
+
+function sortTasks(tasks) {
+  const sortedAsc = tasks.sort(
+    (objA, objB) => Number(objA.createdAt) - Number(objB.createdAt),
+  );
+
+  return sortedAsc
+}
+
 
 function changeDateFormat(createdAt) {
   const dateTime = new Date(createdAt);
@@ -86,7 +96,7 @@ function showTasks(tasks) {
     <p class="todo"  title="${changeDateFormat(createdAt)}">${text}</p>
     <i class="fa-solid fa-pen-to-square edite-icon"></i>
     <i class="fa-solid fa-xmark remove-icon"></i>
-  </li>`
+    </li>`
   });
   todoList.innerHTML = listHtml;
 }

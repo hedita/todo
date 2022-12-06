@@ -66,18 +66,6 @@ async function getTasks() {
     backendErrorMessage.innerText = "Something went wrong!";
   }
 }
-const tasks = sortTasks(await getTasks());
-console.log(tasks)
-
-
-function sortTasks(tasks) {
-  const sortedAsc = tasks.sort(
-    (objA, objB) => Number(objA.createdAt) - Number(objB.createdAt),
-  );
-
-  return sortedAsc
-}
-
 
 function changeDateFormat(createdAt) {
   const dateTime = new Date(createdAt);
@@ -89,8 +77,12 @@ function changeDateFormat(createdAt) {
 }
 
 function showTasks(tasks) {
+  const sortedTasks = tasks.sort(
+    (objA, objB) => new Date(objB.createdAt) - new Date(objA.createdAt),
+  );
+
   let listHtml = "";
-  tasks.forEach(({text, createdAt}) => {
+  sortedTasks.forEach(({text, createdAt}) => {
     listHtml += ` <li class="todo-item">
     <input type="checkbox" />
     <p class="todo"  title="${changeDateFormat(createdAt)}">${text}</p>

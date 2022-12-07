@@ -4,20 +4,22 @@ const errorMessage = document.getElementById("error-message");
 const backendErrorMessage = document.getElementById("backend-error-message");
 const todoList = document.getElementById("todo-list");
 const filterItemAll = document.getElementById("filter-item-all");
-const filterItemUncompleted = document.getElementById("filter-item-uncompleted");
-const url = "http://localhost:3030/todos";
+const filterItemUncompleted = document.getElementById(
+  "filter-item-uncompleted"
+);
+const url = "http://localhost:3030";
 
 async function postTodo(todoText) {
   try {
-    const response = await fetch(url, {
+    const response = await fetch(`${url}/todos`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ text: todoText }),
     });
-    const {error, data} = await response.json();
-   
+    const { error, data } = await response.json();
+
     if (response.status !== 201) {
       errorMessage.innerText = error;
     }
@@ -59,16 +61,16 @@ function clearErrorMessage() {
 
 async function getTasks() {
   try {
-    const response = await fetch(url);
-    const {data} = await response.json();
+    const response = await fetch(`${url}/todos`);
+    const { data } = await response.json();
     return data;
   } catch {
     backendErrorMessage.innerText = "Something went wrong!";
   }
 }
 
-function changeDateFormat(createdAt) {
-  const dateTime = new Date(createdAt);
+function formatDate(date) {
+  const dateTime = new Date(date);
   const year = dateTime.toLocaleDateString("en-US", { year: "numeric" });
   const month = dateTime.toLocaleDateString("en-US", { month: "short" });
   const day = dateTime.toLocaleDateString("en-US", { day: "numeric" });
@@ -78,17 +80,17 @@ function changeDateFormat(createdAt) {
 
 function showTasks(tasks) {
   const sortedTasks = tasks.sort(
-    (objA, objB) => new Date(objB.createdAt) - new Date(objA.createdAt),
+    (objA, objB) => new Date(objB.createdAt) - new Date(objA.createdAt)
   );
 
   let listHtml = "";
-  sortedTasks.forEach(({text, createdAt}) => {
+  sortedTasks.forEach(({ text, createdAt: date }) => {
     listHtml += ` <li class="todo-item">
     <input type="checkbox" />
-    <p class="todo"  title="${changeDateFormat(createdAt)}">${text}</p>
+    <p class="todo"  title="${formatDate(date)}">${text}</p>
     <i class="fa-solid fa-pen-to-square edite-icon"></i>
     <i class="fa-solid fa-xmark remove-icon"></i>
-    </li>`
+    </li>`;
   });
   todoList.innerHTML = listHtml;
 }

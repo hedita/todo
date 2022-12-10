@@ -24,7 +24,7 @@ async function postTodo(todoText) {
       errorMessage.innerText = error;
     }
   } catch (error) {
-    backendErrorMessage.innerText = "Something went wrong!";
+      showNetworkError();
   }
 }
 
@@ -93,4 +93,13 @@ function showTasks(tasks) {
     </li>`;
   });
   todoList.innerHTML = listHtml;
+}
+
+function filterItem() {
+  filterItemAll.innerText = tasks.length;
+  filterItemUncompleted.innerText = tasks.length;
+}
+
+function showNetworkError() {
+  backendErrorMessage.innerText = "Something went wrong!";
 }

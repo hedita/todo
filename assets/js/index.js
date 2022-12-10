@@ -65,7 +65,7 @@ async function getTasks() {
     const { data } = await response.json();
     return data;
   } catch {
-    backendErrorMessage.innerText = "Something went wrong!";
+     showNetworkError();
   }
 }
 

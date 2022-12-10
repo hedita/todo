@@ -79,20 +79,14 @@ function formatDate(date) {
 }
 
 function showTasks(tasks) {
-  const sortedTasks = tasks.sort(
-    (objA, objB) => new Date(objB.createdAt) - new Date(objA.createdAt)
-  );
-
-  let listHtml = "";
-  sortedTasks.forEach(({ text, createdAt: date }) => {
-    listHtml += ` <li class="todo-item">
+  todoList.innerHTML = tasks.sort(
+    (a, b) => new Date(b.createdAt) -  new Date(a.createdAt)
+  ).map(({text, createdAt}) => `<li class="todo-item">
     <input type="checkbox" />
-    <p class="todo"  title="${formatDate(date)}">${text}</p>
+    <p class="todo"  title="${formatDate(createdAt)}">${text}</p>
     <i class="fa-solid fa-pen-to-square edite-icon"></i>
     <i class="fa-solid fa-xmark remove-icon"></i>
-    </li>`;
-  });
-  todoList.innerHTML = listHtml;
+    </li>`).join("");
 }
 
 function filterItem() {

@@ -19,13 +19,13 @@ async function postTodo(todoText) {
       },
       body: JSON.stringify({ text: todoText }),
     });
-    const { error, data } = await response.json();
+    const { error } = await response.json();
 
     if (response.status !== 201) {
       errorMessage.innerText = error;
     }
   } catch (error) {
-      showNetworkError();
+    showNetworkError();
   }
 }
 
@@ -68,7 +68,7 @@ async function getTasks() {
     const { data } = await response.json();
     return data;
   } catch {
-     showNetworkError();
+    showNetworkError();
   }
 }
 

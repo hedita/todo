@@ -35,9 +35,7 @@ addTaskIcon.addEventListener("click", async function () {
   clearErrorMessage();
   const tasks = await getTasks();
   showTasks(tasks);
-  filterItemAllTasks(tasks);
-  filterItemCompletedTasks(tasks);
-  filterItemUncompletedTasks(tasks);
+  updateFilterCounts(tasks);
 });
 
 addTaskInput.addEventListener("keydown", async (e) => {
@@ -47,9 +45,7 @@ addTaskInput.addEventListener("keydown", async (e) => {
     clearErrorMessage();
     const tasks = await getTasks();
     showTasks(tasks);
-    updateAllTasksCount(tasks);
-    updateCompletedTasksCount(tasks);
-    updateUncompletedTasksCount(tasks);
+    updateFilterCounts(tasks);
   }
 });
 
@@ -102,6 +98,12 @@ function updateCompletedTasksCount(tasks) {
 
 function updateUncompletedTasksCount(tasks) {
   filterItemUncompleted.innerText = tasks.filter(task => !task.isDone).length;
+}
+
+function updateFilterCounts(tasks) {
+  updateAllTasksCount(tasks);
+  updateCompletedTasksCount(tasks);
+  updateUncompletedTasksCount(tasks);
 }
 
 function showNetworkError() {

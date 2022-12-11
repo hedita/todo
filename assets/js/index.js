@@ -7,6 +7,7 @@ const filterItemAll = document.getElementById("filter-item-all");
 const filterItemUncompleted = document.getElementById(
   "filter-item-uncompleted"
 );
+const filterItemCompleted = document.getElementById("filter-item-completed");
 const url = "http://localhost:3030";
 
 async function postTodo(todoText) {
@@ -34,8 +35,9 @@ addTaskIcon.addEventListener("click", async function () {
   clearErrorMessage();
   const tasks = await getTasks();
   showTasks(tasks);
-  filterItemAll.innerText = tasks.length;
-  filterItemUncompleted.innerText = tasks.length;
+  filterItemAllTasks();
+  filterItemCompletedTasks();
+  filterItemUncompletedTasks();
 });
 
 addTaskInput.addEventListener("keydown", async (e) => {
@@ -45,8 +47,9 @@ addTaskInput.addEventListener("keydown", async (e) => {
     clearErrorMessage();
     const tasks = await getTasks();
     showTasks(tasks);
-    filterItemAll.innerText = tasks.length;
-    filterItemUncompleted.innerText = tasks.length;
+    filterItemAllTasks();
+    filterItemCompletedTasks();
+    filterItemUncompletedTasks();
   }
 });
 
@@ -89,9 +92,19 @@ function showTasks(tasks) {
     </li>`).join("");
 }
 
-function filterItem() {
+async function filterItemAllTasks() {
+  const tasks = await getTasks();
   filterItemAll.innerText = tasks.length;
-  filterItemUncompleted.innerText = tasks.length;
+}
+
+async function filterItemCompletedTasks() {
+  const tasks = await getTasks();
+  filterItemCompleted.innerText = tasks.filter(task => task.isDone).length;
+}
+
+async function filterItemUncompletedTasks() {
+  const tasks = await getTasks();
+  filterItemUncompleted.innerText = tasks.filter(task => !task.isDone).length;
 }
 
 function showNetworkError() {

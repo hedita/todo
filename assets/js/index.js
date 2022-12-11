@@ -47,9 +47,9 @@ addTaskInput.addEventListener("keydown", async (e) => {
     clearErrorMessage();
     const tasks = await getTasks();
     showTasks(tasks);
-    filterItemAllTasks(tasks);
-    filterItemCompletedTasks(tasks);
-    filterItemUncompletedTasks(tasks);
+    updateAllTasksCount(tasks);
+    updateCompletedTasksCount(tasks);
+    updateUncompletedTasksCount(tasks);
   }
 });
 
@@ -92,15 +92,15 @@ function showTasks(tasks) {
     </li>`).join("");
 }
 
-function filterItemAllTasks(tasks) {
+function updateAllTasksCount(tasks) {
   filterItemAll.innerText = tasks.length;
 }
 
-function filterItemCompletedTasks(tasks) {
+function updateCompletedTasksCount(tasks) {
   filterItemCompleted.innerText = tasks.filter(task => task.isDone).length;
 }
 
-function filterItemUncompletedTasks(tasks) {
+function updateUncompletedTasksCount(tasks) {
   filterItemUncompleted.innerText = tasks.filter(task => !task.isDone).length;
 }
 

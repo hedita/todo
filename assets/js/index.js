@@ -35,9 +35,9 @@ addTaskIcon.addEventListener("click", async function () {
   clearErrorMessage();
   const tasks = await getTasks();
   showTasks(tasks);
-  filterItemAllTasks();
-  filterItemCompletedTasks();
-  filterItemUncompletedTasks();
+  filterItemAllTasks(tasks);
+  filterItemCompletedTasks(tasks);
+  filterItemUncompletedTasks(tasks);
 });
 
 addTaskInput.addEventListener("keydown", async (e) => {
@@ -47,9 +47,9 @@ addTaskInput.addEventListener("keydown", async (e) => {
     clearErrorMessage();
     const tasks = await getTasks();
     showTasks(tasks);
-    filterItemAllTasks();
-    filterItemCompletedTasks();
-    filterItemUncompletedTasks();
+    filterItemAllTasks(tasks);
+    filterItemCompletedTasks(tasks);
+    filterItemUncompletedTasks(tasks);
   }
 });
 
@@ -92,18 +92,15 @@ function showTasks(tasks) {
     </li>`).join("");
 }
 
-async function filterItemAllTasks() {
-  const tasks = await getTasks();
+function filterItemAllTasks(tasks) {
   filterItemAll.innerText = tasks.length;
 }
 
-async function filterItemCompletedTasks() {
-  const tasks = await getTasks();
+function filterItemCompletedTasks(tasks) {
   filterItemCompleted.innerText = tasks.filter(task => task.isDone).length;
 }
 
-async function filterItemUncompletedTasks() {
-  const tasks = await getTasks();
+function filterItemUncompletedTasks(tasks) {
   filterItemUncompleted.innerText = tasks.filter(task => !task.isDone).length;
 }
 

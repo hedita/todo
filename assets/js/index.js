@@ -124,6 +124,14 @@ function showNetworkError() {
   backendErrorMessage.innerText = "Something went wrong!";
 }
 
+removeIcons.forEach(removeIcon => {
+  removeIcon.addEventListener("click", function () {
+
+  })
+});
+
+console.log(removeIcons)
+
 async function showTasksFirstRender() {
   const tasks = await getTasks();
   showTasks(tasks);

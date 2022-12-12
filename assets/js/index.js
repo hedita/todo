@@ -8,6 +8,7 @@ const filterItemUncompleted = document.getElementById(
   "filter-item-uncompleted"
 );
 const filterItemCompleted = document.getElementById("filter-item-completed");
+const removeIcons = Array.from(document.getElementsByClassName("remove-icon"));
 const url = "http://localhost:3030";
 
 async function postTodo(todoText) {
@@ -24,6 +25,19 @@ async function postTodo(todoText) {
     if (response.status !== 201) {
       errorMessage.innerText = error;
     }
+  } catch (error) {
+    showNetworkError();
+  }
+}
+
+async function deleteTodo() {
+  try {
+    const response = await fetch(`${url}/todos`, {
+      method: "DELETE",
+      headers: {
+        "content-Type": "application/json",
+      },
+    })
   } catch (error) {
     showNetworkError();
   }
@@ -109,3 +123,11 @@ function updateFilterCounts(tasks) {
 function showNetworkError() {
   backendErrorMessage.innerText = "Something went wrong!";
 }
+
+async function showTasksFirstRender() {
+  const tasks = await getTasks();
+  showTasks(tasks);
+  updateFilterCounts(tasks);
+}
+
+showTasksFirstRender();

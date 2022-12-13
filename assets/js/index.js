@@ -34,7 +34,7 @@ async function deleteTodo(taskId) {
     await fetch(`${url}/todos/${taskId}`, {
       method: "DELETE"
     });
-    showTasks();
+    showTasksFirstRender();
   } catch (error) {
     showNetworkError();
   }

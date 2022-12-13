@@ -8,7 +8,6 @@ const filterItemUncompleted = document.getElementById(
   "filter-item-uncompleted"
 );
 const filterItemCompleted = document.getElementById("filter-item-completed");
-const removeIcons = Array.from(document.getElementsByClassName("remove-icon"));
 const url = "http://localhost:3030";
 
 async function postTodo(todoText) {
@@ -30,14 +29,15 @@ async function postTodo(todoText) {
   }
 }
 
-async function deleteTodo() {
+async function deleteTodo(taskId) {
   try {
-    const response = await fetch(`${url}/todos`, {
+    const response = await fetch(`${url}/todos/${taskId}`, {
       method: "DELETE",
       headers: {
         "content-Type": "application/json",
-      },
-    })
+      }
+    });
+    showTasks();
   } catch (error) {
     showNetworkError();
   }
@@ -94,12 +94,18 @@ function formatDate(date) {
 function showTasks(tasks) {
   todoList.innerHTML = tasks.sort(
     (a, b) => new Date(b.createdAt) -  new Date(a.createdAt)
-  ).map(({text, createdAt}) => `<li class="todo-item">
+  ).map(({ text, createdAt, id: taskId }) => `<li id="${taskId}" class="todo-item">
     <input type="checkbox" />
     <p class="todo"  title="${formatDate(createdAt)}">${text}</p>
     <i class="fa-solid fa-pen-to-square edite-icon"></i>
     <i class="fa-solid fa-xmark remove-icon"></i>
     </li>`).join("");
+  const removeIcons = Array.from(document.getElementsByClassName("remove-icon"));
+  removeIcons.forEach(removeIcon => {
+    removeIcon.addEventListener("click", function (event) {
+      deleteTodo(event.target.parentNode.id);
+    })
+  });
 }
 
 function updateAllTasksCount(tasks) {
@@ -123,14 +129,6 @@ function updateFilterCounts(tasks) {
 function showNetworkError() {
   backendErrorMessage.innerText = "Something went wrong!";
 }
-
-removeIcons.forEach(removeIcon => {
-  removeIcon.addEventListener("click", function () {
-
-  })
-});
-
-console.log(removeIcons)
 
 async function showTasksFirstRender() {
   const tasks = await getTasks();

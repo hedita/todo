@@ -97,12 +97,7 @@ function showTasks(tasks) {
     <i class="fa-solid fa-pen-to-square edite-icon"></i>
     <i class="fa-solid fa-xmark remove-icon"></i>
     </li>`).join("");
-  const removeIcons = Array.from(document.getElementsByClassName("remove-icon"));
-  removeIcons.forEach(removeIcon => {
-    removeIcon.addEventListener("click", function (event) {
-      deleteTodo(event.target.parentNode.id);
-    })
-  });
+  bindDeleteEvent();
 }
 
 function updateAllTasksCount(tasks) {
@@ -131,6 +126,15 @@ async function showTasksFirstRender() {
   const tasks = await getTasks();
   showTasks(tasks);
   updateFilterCounts(tasks);
+}
+
+function bindDeleteEvent() {
+  const removeIcons = Array.from(document.getElementsByClassName("remove-icon"));
+  removeIcons.forEach(removeIcon => {
+    removeIcon.addEventListener("click", function (event) {
+      deleteTodo(event.target.parentNode.id);
+    })
+  });
 }
 
 showTasksFirstRender();

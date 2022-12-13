@@ -31,11 +31,8 @@ async function postTodo(todoText) {
 
 async function deleteTodo(taskId) {
   try {
-    const response = await fetch(`${url}/todos/${taskId}`, {
-      method: "DELETE",
-      headers: {
-        "content-Type": "application/json",
-      }
+    await fetch(`${url}/todos/${taskId}`, {
+      method: "DELETE"
     });
     showTasks();
   } catch (error) {

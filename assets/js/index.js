@@ -44,9 +44,7 @@ addTaskIcon.addEventListener("click", async function () {
   await postTodo(addTaskInput.value);
   clearAddTodoInput();
   clearErrorMessage();
-  const tasks = await getTasks();
-  showTasks(tasks);
-  updateFilterCounts(tasks);
+  renderTasks();
 });
 
 addTaskInput.addEventListener("keydown", async (e) => {
@@ -54,9 +52,7 @@ addTaskInput.addEventListener("keydown", async (e) => {
     await postTodo(addTaskInput.value);
     clearAddTodoInput();
     clearErrorMessage();
-    const tasks = await getTasks();
-    showTasks(tasks);
-    updateFilterCounts(tasks);
+    renderTasks();
   }
 });
 

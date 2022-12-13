@@ -34,7 +34,7 @@ async function deleteTodo(taskId) {
     await fetch(`${url}/todos/${taskId}`, {
       method: "DELETE"
     });
-    initalTodoApp();
+    renderTasks();
   } catch (error) {
     showNetworkError();
   }
@@ -122,7 +122,7 @@ function showNetworkError() {
   backendErrorMessage.innerText = "Something went wrong!";
 }
 
-async function initalTodoApp() {
+async function renderTasks() {
   const tasks = await getTasks();
   showTasks(tasks);
   updateFilterCounts(tasks);
@@ -137,4 +137,4 @@ function bindDeleteEvent() {
   });
 }
 
-initalTodoApp();
+renderTasks();

@@ -23,7 +23,7 @@ async function postTodo(todoText) {
 
     if (response.status !== 201) {
       errorMessage.innerText = error;
-    }
+    } 
   } catch (error) {
     showNetworkError();
   }
@@ -35,24 +35,35 @@ async function deleteTodo(taskId) {
       method: "DELETE"
     });
     renderTasks();
+
   } catch (error) {
     showNetworkError();
   }
 }
 
 addTaskIcon.addEventListener("click", async function () {
+  clearErrorMessage();
   await postTodo(addTaskInput.value);
   clearAddTodoInput();
-  clearErrorMessage();
-  renderTasks();
+  if (response.status === 400) {
+    errorMessage.innerText = error;
+  }
+  else {
+    renderTasks();
+  }
 });
 
 addTaskInput.addEventListener("keydown", async (e) => {
   if (e.key === "Enter") {
+    clearErrorMessage();
     await postTodo(addTaskInput.value);
     clearAddTodoInput();
-    clearErrorMessage();
-    renderTasks();
+    if (response.status === 400) {
+      errorMessage.innerText = error;
+    }
+    else {
+      renderTasks();
+    }
   }
 });
 

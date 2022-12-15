@@ -23,8 +23,7 @@ async function postTodo(todoText) {
 
     if (response.status !== 201) {
       errorMessage.innerText = error;
-    } 
-    else {
+    } else {
       clearErrorMessage();
     }
   } catch (error) {

@@ -23,7 +23,20 @@ async function postTodo(todoText) {
 
     if (response.status !== 201) {
       errorMessage.innerText = error;
+    } else {
+      clearErrorMessage();
     }
+  } catch (error) {
+    showNetworkError();
+  }
+}
+
+async function deleteTodo(taskId) {
+  try {
+    await fetch(`${url}/todos/${taskId}`, {
+      method: "DELETE"
+    });
+    renderTasks();
   } catch (error) {
     showNetworkError();
   }
@@ -32,20 +45,14 @@ async function postTodo(todoText) {
 addTaskIcon.addEventListener("click", async function () {
   await postTodo(addTaskInput.value);
   clearAddTodoInput();
-  clearErrorMessage();
-  const tasks = await getTasks();
-  showTasks(tasks);
-  updateFilterCounts(tasks);
+  renderTasks();
 });
 
 addTaskInput.addEventListener("keydown", async (e) => {
   if (e.key === "Enter") {
-    await postTodo(addTaskInput.value);
+    await postTodo(addTaskInput.value)
     clearAddTodoInput();
-    clearErrorMessage();
-    const tasks = await getTasks();
-    showTasks(tasks);
-    updateFilterCounts(tasks);
+    renderTasks();
   }
 });
 
@@ -80,12 +87,13 @@ function formatDate(date) {
 function showTasks(tasks) {
   todoList.innerHTML = tasks.sort(
     (a, b) => new Date(b.createdAt) -  new Date(a.createdAt)
-  ).map(({text, createdAt}) => `<li class="todo-item">
+  ).map(({ text, createdAt, id: taskId }) => `<li id="${taskId}" class="todo-item">
     <input type="checkbox" />
     <p class="todo"  title="${formatDate(createdAt)}">${text}</p>
     <i class="fa-solid fa-pen-to-square edite-icon"></i>
     <i class="fa-solid fa-xmark remove-icon"></i>
     </li>`).join("");
+  bindDeleteEvent();
 }
 
 function updateAllTasksCount(tasks) {
@@ -109,3 +117,20 @@ function updateFilterCounts(tasks) {
 function showNetworkError() {
   backendErrorMessage.innerText = "Something went wrong!";
 }
+
+async function renderTasks() {
+  const tasks = await getTasks();
+  showTasks(tasks);
+  updateFilterCounts(tasks);
+}
+
+function bindDeleteEvent() {
+  const removeIcons = Array.from(document.getElementsByClassName("remove-icon"));
+  removeIcons.forEach(removeIcon => {
+    removeIcon.addEventListener("click", function (event) {
+      deleteTodo(event.target.parentNode.id);
+    })
+  });
+}
+
+renderTasks();

@@ -45,12 +45,14 @@ async function deleteTodo(taskId) {
 addTaskIcon.addEventListener("click", async function () {
   await postTodo(addTaskInput.value);
   clearAddTodoInput();
+  renderTasks();
 });
 
 addTaskInput.addEventListener("keydown", async (e) => {
   if (e.key === "Enter") {
     await postTodo(addTaskInput.value)
     clearAddTodoInput();
+    renderTasks();
   }
 });
 

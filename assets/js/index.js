@@ -100,9 +100,8 @@ function formatDate(date) {
 }
 
 function showTasks(tasks) {
-  todoList.innerHTML = tasks.sort(
-    (a, b) => new Date(b.createdAt) -  new Date(a.createdAt)
-  ).map(({ text, createdAt, id: taskId, isDone }) =>
+  todoList.innerHTML = sortTasksByIsDone(sortTasksByTime(tasks))
+    .map(({ text, createdAt, id: taskId, isDone }) =>
     `<li id="${taskId}" class="todo-item">
     <input class="checkbox" type="checkbox" ${isChecked(isDone)}/>
     <p class="todo"  title="${formatDate(createdAt)}">${text}</p>
@@ -166,6 +165,18 @@ function isChecked(isDone) {
   } else {
     return ""
   }
+}
+
+function sortTasksByTime(tasks) {
+  return tasks.sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  )
+}
+
+function sortTasksByIsDone(tasks) {
+  return tasks.sort(
+    (a, b) => a.isDone - b.isDone
+  )
 }
 
 renderTasks();

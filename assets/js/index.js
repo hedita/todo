@@ -42,6 +42,21 @@ async function deleteTodo(taskId) {
   }
 }
 
+async function updateStatus(taskId, isDone) {
+  try {
+    await fetch(`${url}/todos/${taskId}`, {
+      method: "PATCH",
+      body: JSON.stringify({ isDone }),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+    renderTasks();
+  } catch (error) {
+    showNetworkError();
+  }
+}
+
 addTaskIcon.addEventListener("click", async function () {
   await postTodo(addTaskInput.value);
   clearAddTodoInput();
@@ -87,13 +102,16 @@ function formatDate(date) {
 function showTasks(tasks) {
   todoList.innerHTML = tasks.sort(
     (a, b) => new Date(b.createdAt) -  new Date(a.createdAt)
-  ).map(({ text, createdAt, id: taskId }) => `<li id="${taskId}" class="todo-item">
-    <input type="checkbox" />
+  ).map(({ text, createdAt, id: taskId, isDone }) =>
+    `<li id="${taskId}" class="todo-item">
+    <input class="checkbox" type="checkbox" ${isChecked(isDone)}/>
     <p class="todo"  title="${formatDate(createdAt)}">${text}</p>
     <i class="fa-solid fa-pen-to-square edite-icon"></i>
     <i class="fa-solid fa-xmark remove-icon"></i>
     </li>`).join("");
   bindDeleteEvent();
+  bindUpdateEvent();
+
 }
 
 function updateAllTasksCount(tasks) {
@@ -131,6 +149,23 @@ function bindDeleteEvent() {
       deleteTodo(event.target.parentNode.id);
     })
   });
+}
+
+function bindUpdateEvent() {
+  const checkboxs = Array.from(document.getElementsByClassName("checkbox"));
+  checkboxs.forEach(checkbox => {
+    checkbox.addEventListener("change", function (event) {
+      updateStatus(event.target.parentNode.id, this.checked);
+    })
+  });
+}
+
+function isChecked(isDone) {
+  if (isDone == true) {
+    return "checked"
+  } else {
+    return ""
+  }
 }
 
 renderTasks();

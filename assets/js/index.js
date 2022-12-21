@@ -109,8 +109,6 @@ function showTasks(tasks) {
     <i class="fa-solid fa-xmark remove-icon"></i>
     </li>`).join("");
   bindDeleteEvent();
-  bindUpdateEvent();
-
 }
 
 function updateAllTasksCount(tasks) {
@@ -160,7 +158,7 @@ function bindUpdateEvent() {
 }
 
 function isChecked(isDone) {
-  if (isDone == true) {
+  if (isDone === true) {
     return "checked"
   } else {
     return ""

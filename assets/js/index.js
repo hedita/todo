@@ -173,7 +173,7 @@ function sortTasksByTime(tasks) {
   )
 }
 
-function sortTasksByIsDone(tasks) {
+function sortTasksByStatus(tasks) {
   return tasks.sort(
     (a, b) => a.isDone - b.isDone
   )

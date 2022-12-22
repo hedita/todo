@@ -54,6 +54,18 @@ async function updateStatus(taskId, isDone) {
   }
 }
 
+async function editeTodo(taskId, text) {
+  try {
+    await fetch(`${url}/todos/${taskId}`, {
+      method: "PATCH",
+      body: JSON.stringify({ text }),
+      headers: requestDefaultHeaders,
+    });
+  } catch (error) {
+    showNetworkError();
+  }
+}
+
 addTaskIcon.addEventListener("click", async function () {
   await postTodo(addTaskInput.value);
   clearAddTodoInput();
@@ -151,6 +163,16 @@ function bindUpdateEvent() {
   checkboxs.forEach(checkbox => {
     checkbox.addEventListener("change", function (event) {
       updateStatus(event.target.parentNode.id, this.checked);
+    })
+  });
+}
+
+
+function bindEditeEvent() {
+  const editeIcons = Array.from(document.getElementsByClassName("edite-icon"));
+  editeIcons.forEach(editeIcon => {
+    editeIcon.addEventListener("click", function (event) {
+      console.log("hi")
     })
   });
 }

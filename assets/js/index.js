@@ -9,13 +9,13 @@ const filterItemUncompleted = document.getElementById(
 );
 const filterItemCompleted = document.getElementById("filter-item-completed");
 const url = "http://localhost:3030";
-const headers = { "Content-Type": "application/json" };
+const requestDefaultHeaders = { "Content-Type": "application/json" };
 
 async function postTodo(todoText) {
   try {
     const response = await fetch(`${url}/todos`, {
       method: "POST",
-      headers,
+      headers: requestDefaultHeaders,
       body: JSON.stringify({ text: todoText }),
     });
     const { error } = await response.json();
@@ -46,7 +46,7 @@ async function updateStatus(taskId, isDone) {
     await fetch(`${url}/todos/${taskId}`, {
       method: "PATCH",
       body: JSON.stringify({ isDone }),
-      headers,
+      headers: requestDefaultHeaders,
     });
     renderTasks();
   } catch (error) {

@@ -9,16 +9,13 @@ const filterItemUncompleted = document.getElementById(
 );
 const filterItemCompleted = document.getElementById("filter-item-completed");
 const url = "http://localhost:3030";
-const headers = `"Content-Type": "application/json"`;
-
+const headers = { "Content-Type": "application/json" };
 
 async function postTodo(todoText) {
   try {
     const response = await fetch(`${url}/todos`, {
       method: "POST",
-      headers: {
-        headers
-      },
+      headers,
       body: JSON.stringify({ text: todoText }),
     });
     const { error } = await response.json();
@@ -49,9 +46,7 @@ async function updateStatus(taskId, isDone) {
     await fetch(`${url}/todos/${taskId}`, {
       method: "PATCH",
       body: JSON.stringify({ isDone }),
-      headers: {
-        headers
-      }
+      headers,
     });
     renderTasks();
   } catch (error) {
@@ -102,7 +97,7 @@ function formatDate(date) {
 }
 
 function showTasks(tasks) {
-  todoList.innerHTML = sortTasksByIsDone(sortTasksByTime(tasks))
+  todoList.innerHTML = sortTasksByStatus(sortTasksByTime(tasks))
     .map(({ text, createdAt, id: taskId, isDone }) =>
     `<li id="${taskId}" class="todo-item">
     <input class="checkbox" type="checkbox" ${isChecked(isDone)}/>
@@ -111,6 +106,7 @@ function showTasks(tasks) {
     <i class="fa-solid fa-xmark remove-icon"></i>
     </li>`).join("");
   bindDeleteEvent();
+  bindUpdateEvent();
 }
 
 function updateAllTasksCount(tasks) {

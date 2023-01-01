@@ -158,7 +158,6 @@ function bindDeleteEvent() {
   removeIcons.forEach(removeIcon => {
     removeIcon.addEventListener("click", function (event) {
       deleteTodo(event.target.parentNode.id);
-      console.log(event.target.parentNode)
     })
   });
 }

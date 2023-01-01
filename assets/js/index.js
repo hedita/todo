@@ -54,13 +54,14 @@ async function updateStatus(taskId, isDone) {
   }
 }
 
-async function editeTodo(taskId, text) {
+async function editTodo(taskId, todoText) {
   try {
     await fetch(`${url}/todos/${taskId}`, {
       method: "PATCH",
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({ text: todoText }),
       headers: requestDefaultHeaders,
     });
+    renderTasks();
   } catch (error) {
     showNetworkError();
   }
@@ -112,13 +113,16 @@ function showTasks(tasks) {
   todoList.innerHTML = sortTasksByStatus(sortTasksByTime(tasks))
     .map(({ text, createdAt, id: taskId, isDone }) =>
     `<li id="${taskId}" class="todo-item">
-    <input class="checkbox" type="checkbox" ${isChecked(isDone)}/>
-    <p class="todo"  title="${formatDate(createdAt)}">${text}</p>
-    <i class="fa-solid fa-pen-to-square edite-icon"></i>
-    <i class="fa-solid fa-xmark remove-icon"></i>
+    <input id="checkbox-${taskId}" class="checkbox" type="checkbox" ${isChecked(isDone)}/>
+    <div id="todo-container-${taskId}">
+    <p class="todo" title="${formatDate(createdAt)}">${text}</p>
+    </div>
+    <i id="edit-icon-${taskId}" class="fa-solid fa-pen-to-square edit-icon"></i>
+    <i id="remove-icon-${taskId}"class="fa-solid fa-xmark remove-icon"></i>
     </li>`).join("");
   bindDeleteEvent();
   bindUpdateEvent();
+  bindEditEvent();
 }
 
 function updateAllTasksCount(tasks) {
@@ -154,27 +158,58 @@ function bindDeleteEvent() {
   removeIcons.forEach(removeIcon => {
     removeIcon.addEventListener("click", function (event) {
       deleteTodo(event.target.parentNode.id);
+      console.log(event.target.parentNode)
     })
   });
 }
 
 function bindUpdateEvent() {
-  const checkboxs = Array.from(document.getElementsByClassName("checkbox"));
-  checkboxs.forEach(checkbox => {
+  const checkboxes = Array.from(document.getElementsByClassName("checkbox"));
+  checkboxes.forEach(checkbox => {
     checkbox.addEventListener("change", function (event) {
       updateStatus(event.target.parentNode.id, this.checked);
     })
   });
 }
 
-
-function bindEditeEvent() {
-  const editeIcons = Array.from(document.getElementsByClassName("edite-icon"));
-  editeIcons.forEach(editeIcon => {
-    editeIcon.addEventListener("click", function (event) {
-      console.log("hi")
+function bindEditEvent() {
+  const editIcons = Array.from(document.getElementsByClassName("edit-icon"));
+  editIcons.forEach(editIcon => {
+    editIcon.addEventListener("click", function (event) {
+      const taskId = event.target.parentNode.id;
+      const todoContainer = document.getElementById(`todo-container-${taskId}`);
+      const todoText = todoContainer.innerText;
+      todoContainer.innerHTML = `<input class="edited-todo" type="text" value="${todoContainer.innerText}"/>
+      <i id="check-icon-${taskId}" class="fa-solid fa-check check-icon"></i>`
+      handleIcons(taskId, editIcon);
+      handleCheckIcon(todoText);
     })
   });
+}
+
+function handleCheckIcon(todoText) {
+  const checkIcons = Array.from(document.getElementsByClassName("check-icon"));
+  checkIcons.forEach(checkIcon => {
+    checkIcon.addEventListener("click", function (event) {
+      editTodo(event.target.parentNode.parentNode.id, todoText);
+      handleEditedTodo();
+    })
+  })
+}
+
+function handleIcons(taskId, editIcon) {
+  const removeIcon = document.getElementById(`remove-icon-${taskId}`)
+  const checkbox = document.getElementById(`checkbox-${taskId}`)
+  editIcon.style.visibility = "hidden";
+  removeIcon.style.visibility = "hidden";
+  checkbox.style.visibility = "hidden";
+}
+
+function handleEditedTodo() {
+  const editedTodos = Array.from(document.getElementsByClassName("edited-todo"));
+  editedTodos.forEach(editedTodo => {
+
+  })
 }
 
 function isChecked(isDone) {

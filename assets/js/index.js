@@ -117,7 +117,7 @@ function showTasks(tasks) {
     <div id="todo-container-${taskId}">
     <p class="todo" title="${formatDate(createdAt)}">${text}</p>
     </div>
-    <span id="edit-icon-${taskId}" class="fa-solid fa-pen-to-square edit-icon">22</span>
+    <i id="edit-icon-${taskId}" class="fa-solid fa-pen-to-square edit-icon"></i>
     <i id="remove-icon-${taskId}"class="fa-solid fa-xmark remove-icon"></i>
     </li>`).join("");
   bindDeleteEvent();
@@ -179,7 +179,7 @@ function bindEditEvent() {
       const todoContainer = document.getElementById(`todo-container-${taskId}`);
       const todoText = todoContainer.innerText;
       todoContainer.innerHTML = `<input id="input" class="edited-todo" type="text" value="${todoText}"/>
-      <span id="check-icon-${taskId}" class="fa-solid fa-check check-icon">22</span>`
+      <i id="check-icon-${taskId}" class="fa-solid fa-check check-icon"></i>`
       const checkIcon = document.getElementById(`check-icon-${taskId}`);
       const input = document.getElementById("input");
       checkIcon.addEventListener("click", function () {

@@ -178,13 +178,19 @@ function bindEditEvent() {
       const taskId = event.target.parentNode.id;
       const todoContainer = document.getElementById(`todo-container-${taskId}`);
       const todoText = todoContainer.innerText;
-      todoContainer.innerHTML = `<input id="input" class="edited-todo" type="text" value="${todoContainer.innerText}"/>
+      todoContainer.innerHTML = `<input id="input" class="edited-todo" type="text" value="${todoText}"/>
       <span id="check-icon-${taskId}" class="fa-solid fa-check check-icon">22</span>`
       const checkIcon = document.getElementById(`check-icon-${taskId}`);
       const input = document.getElementById("input");
       checkIcon.addEventListener("click", function () {
-        console.log(input.value)
-        editTodo(taskId, input.value);
+        if (input.value === "") {
+          return todoContainer.innerText = todoText;
+        }
+        if (input.value !== todoText) {
+          editTodo(taskId, input.value);
+        } else {
+          renderTasks();
+        }
       })
       handleIcons(taskId);
     })

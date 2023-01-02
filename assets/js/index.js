@@ -10,7 +10,6 @@ const filterItemUncompleted = document.getElementById(
 const filterItemCompleted = document.getElementById("filter-item-completed");
 const url = "http://localhost:3030";
 const requestDefaultHeaders = { "Content-Type": "application/json" };
-// const editedTodo = document.getElementsByClassName("edited-todo");
 
 async function postTodo(todoText) {
   try {
@@ -62,7 +61,6 @@ async function editTodo(taskId, todoText) {
       body: JSON.stringify({ text: todoText }),
       headers: requestDefaultHeaders,
     });
-    console.log(todoText)
     renderTasks()
   } catch (error) {
     showNetworkError();
@@ -113,7 +111,7 @@ function formatDate(date) {
 
 function showTasks(tasks) {
   todoList.innerHTML = sortTasksByStatus(sortTasksByTime(tasks))
-    .map(({ text, createdAt, id: taskId, isDone }) =>
+    .map(({ text, createdAt, id: taskId, isDone, updatedAt }) =>
     `<li id="${taskId}" class="todo-item">
     <input id="checkbox-${taskId}" class="checkbox" type="checkbox" ${isChecked(isDone)}/>
     <div id="todo-container-${taskId}">
@@ -180,38 +178,24 @@ function bindEditEvent() {
       const taskId = event.target.parentNode.id;
       const todoContainer = document.getElementById(`todo-container-${taskId}`);
       const todoText = todoContainer.innerText;
-      todoContainer.innerHTML = `<input class="edited-todo" type="text" value="${todoContainer.innerText}"/>
+      todoContainer.innerHTML = `<input id="input" class="edited-todo" type="text" value="${todoContainer.innerText}"/>
       <span id="check-icon-${taskId}" class="fa-solid fa-check check-icon">22</span>`
-      handleIcons(taskId, editIcon);
-      handleCheckIcon(todoText);
+      const checkIcon = document.getElementById(`check-icon-${taskId}`);
+      const input = document.getElementById("input");
+      checkIcon.addEventListener("click", function () {
+        console.log(input.value)
+        editTodo(taskId, input.value);
+      })
+      handleIcons(taskId);
     })
   });
 }
 
-function handleCheckIcon(todoText) {
-  const checkIcons = Array.from(document.getElementsByClassName("check-icon"));
-  checkIcons.forEach(checkIcon => {
-    checkIcon.addEventListener("click", function (event) {
-      console.log(editedTodo.value)
-      const taskId = event.target.parentNode.parentNode.id;
-      editTodo(taskId, todoText);
-      // handleEditedTodo(taskId, todoText)
-    })
-  })
+function handleIcons(taskId) {
+  document.getElementById(`remove-icon-${taskId}`).style.visibility = "hidden";
+  document.getElementById(`checkbox-${taskId}`).style.visibility = "hidden";
+  document.getElementById(`edit-icon-${taskId}`).style.visibility = "hidden";
 }
-
-function handleIcons(taskId, editIcon) {
-  const removeIcon = document.getElementById(`remove-icon-${taskId}`)
-  const checkbox = document.getElementById(`checkbox-${taskId}`)
-  editIcon.style.visibility = "hidden";
-  removeIcon.style.visibility = "hidden";
-  checkbox.style.visibility = "hidden";
-}
-
-// function handleEditedTodo(taskId, todoText) {
-//   const todoContainer = document.getElementById(`todo-container-${taskId}`);
-//   todoContainer.innerHTML = `<p class="new-todo-text">${todoText}</p>`
-// }
 
 function isChecked(isDone) {
   if (isDone === true) {

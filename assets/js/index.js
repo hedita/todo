@@ -115,7 +115,7 @@ function showTasks(tasks) {
     `<li id="${taskId}" class="todo-item">
     <input id="checkbox-${taskId}" class="checkbox" type="checkbox" ${isChecked(isDone)}/>
     <div id="todo-container-${taskId}">
-    <p class="todo" title="${formatDate(createdAt)}">${text}</p>
+    <p class="todo" title="${formatDate(createdAt) + " " + formatDate(updatedAt)}">${text}</p>
     </div>
     <i id="edit-icon-${taskId}" class="fa-solid fa-pen-to-square edit-icon"></i>
     <i id="remove-icon-${taskId}"class="fa-solid fa-xmark remove-icon"></i>

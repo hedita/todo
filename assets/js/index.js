@@ -10,6 +10,7 @@ const filterItemUncompleted = document.getElementById(
 const filterItemCompleted = document.getElementById("filter-item-completed");
 const url = "http://localhost:3030";
 const requestDefaultHeaders = { "Content-Type": "application/json" };
+// const editedTodo = document.getElementsByClassName("edited-todo");
 
 async function postTodo(todoText) {
   try {
@@ -61,7 +62,8 @@ async function editTodo(taskId, todoText) {
       body: JSON.stringify({ text: todoText }),
       headers: requestDefaultHeaders,
     });
-    renderTasks();
+    console.log(todoText)
+    renderTasks()
   } catch (error) {
     showNetworkError();
   }
@@ -117,7 +119,7 @@ function showTasks(tasks) {
     <div id="todo-container-${taskId}">
     <p class="todo" title="${formatDate(createdAt)}">${text}</p>
     </div>
-    <i id="edit-icon-${taskId}" class="fa-solid fa-pen-to-square edit-icon"></i>
+    <span id="edit-icon-${taskId}" class="fa-solid fa-pen-to-square edit-icon">22</span>
     <i id="remove-icon-${taskId}"class="fa-solid fa-xmark remove-icon"></i>
     </li>`).join("");
   bindDeleteEvent();
@@ -179,7 +181,7 @@ function bindEditEvent() {
       const todoContainer = document.getElementById(`todo-container-${taskId}`);
       const todoText = todoContainer.innerText;
       todoContainer.innerHTML = `<input class="edited-todo" type="text" value="${todoContainer.innerText}"/>
-      <i id="check-icon-${taskId}" class="fa-solid fa-check check-icon"></i>`
+      <span id="check-icon-${taskId}" class="fa-solid fa-check check-icon">22</span>`
       handleIcons(taskId, editIcon);
       handleCheckIcon(todoText);
     })
@@ -190,8 +192,10 @@ function handleCheckIcon(todoText) {
   const checkIcons = Array.from(document.getElementsByClassName("check-icon"));
   checkIcons.forEach(checkIcon => {
     checkIcon.addEventListener("click", function (event) {
-      editTodo(event.target.parentNode.parentNode.id, todoText);
-      handleEditedTodo();
+      console.log(editedTodo.value)
+      const taskId = event.target.parentNode.parentNode.id;
+      editTodo(taskId, todoText);
+      // handleEditedTodo(taskId, todoText)
     })
   })
 }
@@ -204,12 +208,10 @@ function handleIcons(taskId, editIcon) {
   checkbox.style.visibility = "hidden";
 }
 
-function handleEditedTodo() {
-  const editedTodos = Array.from(document.getElementsByClassName("edited-todo"));
-  editedTodos.forEach(editedTodo => {
-
-  })
-}
+// function handleEditedTodo(taskId, todoText) {
+//   const todoContainer = document.getElementById(`todo-container-${taskId}`);
+//   todoContainer.innerHTML = `<p class="new-todo-text">${todoText}</p>`
+// }
 
 function isChecked(isDone) {
   if (isDone === true) {

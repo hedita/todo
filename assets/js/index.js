@@ -122,7 +122,7 @@ function showTasks(tasks) {
     </li>`).join("");
   bindDeleteEvent();
   bindUpdateIsDoneEvent();
-  bindEditEvent();
+  bindUpdateTextEvent();
 }
 
 function updateAllTasksCount(tasks) {
@@ -171,7 +171,7 @@ function bindUpdateIsDoneEvent() {
   });
 }
 
-function bindEditEvent() {
+function bindUpdateTextEvent() {
   const editIcons = document.querySelectorAll(".edit-icon");
   editIcons.forEach(editIcon => {
     editIcon.addEventListener("click", function (event) {

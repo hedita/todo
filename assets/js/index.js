@@ -192,12 +192,12 @@ function bindEditEvent() {
           renderTasks();
         }
       })
-      handleIcons(taskId);
+      hideTodoItemIcons(taskId);
     })
   });
 }
 
-function handleIcons(taskId) {
+function hideTodoItemIcons(taskId) {
   document.getElementById(`remove-icon-${taskId}`).style.display = "none";
   document.getElementById(`checkbox-${taskId}`).style.display = "none";
   document.getElementById(`edit-icon-${taskId}`).style.display = "none";

@@ -54,11 +54,11 @@ async function updateStatus(taskId, isDone) {
   }
 }
 
-async function editTodo(taskId, todoText) {
+async function editTodo(taskId, newText) {
   try {
     await fetch(`${url}/todos/${taskId}`, {
       method: "PATCH",
-      body: JSON.stringify({ text: todoText }),
+      body: JSON.stringify({ text: newText }),
       headers: requestDefaultHeaders,
     });
     renderTasks()

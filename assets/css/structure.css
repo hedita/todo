@@ -81,7 +81,7 @@ input {
 }
 
 .check-icon {
-  color: green;
+  color: rgb(0, 128, 0);
 }
 .container {
   min-height: 100vh;

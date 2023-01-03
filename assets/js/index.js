@@ -121,7 +121,7 @@ function showTasks(tasks) {
     <i id="remove-icon-${taskId}"class="fa-solid fa-xmark remove-icon"></i>
     </li>`).join("");
   bindDeleteEvent();
-  bindUpdateEvent();
+  bindUpdateIsDoneEvent();
   bindEditEvent();
 }
 
@@ -162,7 +162,7 @@ function bindDeleteEvent() {
   });
 }
 
-function bindUpdateEvent() {
+function bindUpdateIsDoneEvent() {
   const taskItemCheckboxes = document.querySelectorAll(".task-item-checkbox");
   taskItemCheckboxes.forEach(taskItemCheckbox => {
     taskItemCheckbox.addEventListener("change", function (event) {

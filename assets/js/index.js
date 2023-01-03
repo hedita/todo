@@ -172,7 +172,7 @@ function bindUpdateEvent() {
 }
 
 function bindEditEvent() {
-  const editIcons = Array.from(document.getElementsByClassName("edit-icon"));
+  const editIcons = document.querySelectorAll(".edit-icon");
   editIcons.forEach(editIcon => {
     editIcon.addEventListener("click", function (event) {
       const taskId = event.target.parentNode.id;

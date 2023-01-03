@@ -113,7 +113,7 @@ function showTasks(tasks) {
   todoList.innerHTML = sortTasksByStatus(sortTasksByTime(tasks))
     .map(({ text, createdAt, id: taskId, isDone, updatedAt }) =>
     `<li id="${taskId}" class="todo-item">
-    <input id="checkbox-${taskId}" class="checkbox" type="checkbox" ${isChecked(isDone)} />
+    <input id="checkbox-${taskId}" class="task-item-checkbox" type="checkbox" ${isChecked(isDone)}/>
     <div id="todo-container-${taskId}">
     <p class="todo" title="${formatDate(createdAt)} ${formatDate(updatedAt)}">${text}</p>
     </div>
@@ -163,9 +163,9 @@ function bindDeleteEvent() {
 }
 
 function bindUpdateEvent() {
-  const checkboxes = Array.from(document.getElementsByClassName("checkbox"));
-  checkboxes.forEach(checkbox => {
-    checkbox.addEventListener("change", function (event) {
+  const taskItemCheckboxes = document.querySelectorAll(".task-item-checkbox");
+  taskItemCheckboxes.forEach(taskItemCheckbox => {
+    taskItemCheckbox.addEventListener("change", function (event) {
       updateStatus(event.target.parentNode.id, this.checked);
     })
   });

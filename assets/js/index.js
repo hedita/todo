@@ -178,10 +178,10 @@ function bindEditEvent() {
       const taskId = event.target.parentNode.id;
       const todoContainer = document.getElementById(`todo-container-${taskId}`);
       const todoText = todoContainer.innerText;
-      todoContainer.innerHTML = `<input id="input" class="edited-todo" type="text" value="${todoText}"/>
+      todoContainer.innerHTML = `<input id="input-${taskId}" class="edited-todo" type="text" value="${todoText}"/>
       <i id="check-icon-${taskId}" class="fa-solid fa-check check-icon"></i>`
       const checkIcon = document.getElementById(`check-icon-${taskId}`);
-      const input = document.getElementById("input");
+      const input = document.getElementById(`input-${taskId}`);
       checkIcon.addEventListener("click", function () {
         if (input.value === "") {
           return todoContainer.innerText = todoText;
@@ -198,9 +198,9 @@ function bindEditEvent() {
 }
 
 function handleIcons(taskId) {
-  document.getElementById(`remove-icon-${taskId}`).style.visibility = "hidden";
-  document.getElementById(`checkbox-${taskId}`).style.visibility = "hidden";
-  document.getElementById(`edit-icon-${taskId}`).style.visibility = "hidden";
+  document.getElementById(`remove-icon-${taskId}`).style.display = "none";
+  document.getElementById(`checkbox-${taskId}`).style.display = "none";
+  document.getElementById(`edit-icon-${taskId}`).style.display = "none";
 }
 
 function isChecked(isDone) {

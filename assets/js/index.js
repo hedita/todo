@@ -115,10 +115,10 @@ function showTasks(tasks) {
     `<li id="${taskId}" class="todo-item">
     <input id="checkbox-${taskId}" class="task-item-checkbox" type="checkbox" ${isChecked(isDone)}/>
     <div id="todo-container-${taskId}">
-    <p class="todo" title="${formatDate(createdAt)} ${formatDate(updatedAt)}">${text}</p>
+    <p class="todo" id="todo-${taskId}" title="${formatDate(createdAt)} ${formatDate(updatedAt)}">${text}</p>
     </div>
-    <i id="edit-icon-${taskId}" class="fa-solid fa-pen-to-square edit-icon"></i>
-    <i id="remove-icon-${taskId}"class="fa-solid fa-xmark remove-icon"></i>
+    <span id="edit-icon-${taskId}" class="fa-solid fa-pen-to-square edit-icon">22</span>
+    <span id="remove-icon-${taskId}"class="fa-solid fa-xmark remove-icon">22</span>
     </li>`).join("");
   bindDeleteEvent();
   bindUpdateIsDoneEvent();
@@ -171,22 +171,23 @@ function bindUpdateIsDoneEvent() {
   });
 }
 
-function bindUpdateTextEvent() {
+async function bindUpdateTextEvent() {
   const editIcons = document.querySelectorAll(".edit-icon");
   editIcons.forEach(editIcon => {
     editIcon.addEventListener("click", function (event) {
-      const taskId = event.target.parentNode.id;
+      const { id: taskId } = event.target.parentNode;
       const todoContainer = document.getElementById(`todo-container-${taskId}`);
       const todoText = todoContainer.innerText;
       todoContainer.innerHTML = `<input id="input-${taskId}" type="text" value="${todoText}"/>
-      <i id="check-icon-${taskId}" class="fa-solid fa-check check-icon"></i>`
+      <span id="check-icon-${taskId}" class="fa-solid fa-check check-icon">23</span>`
       const checkIcon = document.getElementById(`check-icon-${taskId}`);
       const input = document.getElementById(`input-${taskId}`);
       checkIcon.addEventListener("click", function () {
+
         if (input.value === "") {
-          return todoContainer.innerText = todoText;
+          return todoContainer.innerHTML = todoText;
         }
-        if (input.value !== todoText) {
+        if (input.value.trim() !== todoText) {
           editTodo(taskId, input.value);
         } else {
           renderTasks();

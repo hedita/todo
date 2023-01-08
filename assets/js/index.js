@@ -183,11 +183,11 @@ async function bindUpdateTextEvent() {
       const checkIcon = document.getElementById(`check-icon-${taskId}`);
       const newValue = document.getElementById(`input-${taskId}`).value.trim();
       checkIcon.addEventListener("click", function () {
-        if (input.value === "") {
+        if (newValue === "") {
           todoContainer.innerHTML = todoText;
         }
-        else if (input.value.trim() !== todoText) {
-          editTodo(taskId, input.value);
+        else if (newValue !== todoText) {
+          editTodo(taskId, newValue);
         } else {
           renderTasks();
         }

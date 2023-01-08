@@ -60,7 +60,7 @@ input {
   color: var(--quaternary-color);
 }
 
-.edite-icon {
+.edit-icon {
   visibility: hidden;
   margin-left: auto;
   padding-right: var(--spacing-small);
@@ -72,7 +72,7 @@ input {
   color: var(--tertiary-color);
 }
 
-.todo-item:hover .edite-icon {
+.todo-item:hover .edit-icon {
   visibility: visible;
 }
 
@@ -80,6 +80,9 @@ input {
   visibility: visible;
 }
 
+.check-icon {
+  color: rgb(0, 128, 0);
+}
 .container {
   min-height: 100vh;
   background-color: var(--sixth-color);

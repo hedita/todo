@@ -117,8 +117,8 @@ function showTasks(tasks) {
     <div id="todo-container-${taskId}">
     <p class="todo" id="todo-${taskId}" title="${formatDate(createdAt)} ${formatDate(updatedAt)}">${text}</p>
     </div>
-    <span id="edit-icon-${taskId}" class="fa-solid fa-pen-to-square edit-icon">22</span>
-    <span id="remove-icon-${taskId}"class="fa-solid fa-xmark remove-icon">22</span>
+    <i id="edit-icon-${taskId}" class="fa-solid fa-pen-to-square edit-icon"></i>
+    <i id="remove-icon-${taskId}"class="fa-solid fa-xmark remove-icon"></i>
     </li>`).join("");
   bindDeleteEvent();
   bindUpdateIsDoneEvent();
@@ -179,7 +179,7 @@ async function bindUpdateTextEvent() {
       const todoContainer = document.getElementById(`todo-container-${taskId}`);
       const todoText = todoContainer.innerText;
       todoContainer.innerHTML = `<input id="input-${taskId}" type="text" value="${todoText}"/>
-      <span id="check-icon-${taskId}" class="fa-solid fa-check check-icon">23</span>`
+      <i id="check-icon-${taskId}" class="fa-solid fa-check check-icon"></i>`
       const checkIcon = document.getElementById(`check-icon-${taskId}`);
       const newValue = document.getElementById(`input-${taskId}`).value.trim();
       checkIcon.addEventListener("click", function () {

@@ -181,7 +181,7 @@ async function bindUpdateTextEvent() {
       todoContainer.innerHTML = `<input id="input-${taskId}" type="text" value="${todoText}"/>
       <span id="check-icon-${taskId}" class="fa-solid fa-check check-icon">23</span>`
       const checkIcon = document.getElementById(`check-icon-${taskId}`);
-      const input = document.getElementById(`input-${taskId}`);
+      const newValue = document.getElementById(`input-${taskId}`).value.trim();
       checkIcon.addEventListener("click", function () {
         if (input.value === "") {
           todoContainer.innerHTML = todoText;

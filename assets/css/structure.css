@@ -103,11 +103,3 @@ input {
   font-weight: bold;
   text-align: center;
 }
-
-.filter-item-length {
-  color: var(--secondary-color);
-}
-
-.filter-status {
-  font-weight: bold;
-}

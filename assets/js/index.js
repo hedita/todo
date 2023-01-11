@@ -142,16 +142,25 @@ function updateUncompletedTasksCount(tasks) {
 
 filterStatusAll.addEventListener("click", function () {
   localStorage.setItem("filtered-tasks-list", "filterItemAll");
+  filterStatusAll.style.fontWeight = "bold";
+  filterStatusCompleted.style.removeProperty("font-weight");
+  filterStatusUncompleted.style.removeProperty("font-weight");
   renderTasks();
 })
 
 filterStatusCompleted.addEventListener("click", function () {
   localStorage.setItem("filtered-tasks-list", "filterItemCompleted");
+  filterStatusCompleted.style.fontWeight = "bold";
+  filterStatusAll.style.removeProperty("font-weight");
+  filterStatusUncompleted.style.removeProperty("font-weight");
   renderTasks();
 })
 
 filterStatusUncompleted.addEventListener("click", function () {
   localStorage.setItem("filtered-tasks-list", "filterItemUncompleted");
+  filterStatusUncompleted.style.fontWeight = "bold";
+  filterStatusCompleted.style.removeProperty("font-weight");
+  filterStatusAll.style.removeProperty("font-weight");
   renderTasks();
 })
 

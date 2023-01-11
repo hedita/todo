@@ -64,7 +64,6 @@ async function editTodo(taskId, newText) {
       body: JSON.stringify({ text: newText }),
       headers: requestDefaultHeaders,
     });
-    renderTasks();
   } catch (error) {
     showNetworkError();
   }
@@ -220,10 +219,10 @@ async function bindUpdateTextEvent() {
       todoContainer.innerHTML = `<input id="input-${taskId}" type="text" value="${todoText}"/>
       <i id="check-icon-${taskId}" class="fa-solid fa-check check-icon"></i>`
       const checkIcon = document.getElementById(`check-icon-${taskId}`);
-      checkIcon.addEventListener("click", function () {
+      checkIcon.addEventListener("click", async function () {
         const newValue = document.getElementById(`input-${taskId}`).value.trim();
         if (newValue !== todoText) {
-          editTodo(taskId, newValue)
+          await editTodo(taskId, newValue);
         }
         renderTasks();
       })

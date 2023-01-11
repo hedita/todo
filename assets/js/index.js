@@ -137,18 +137,17 @@ function updateUncompletedTasksCount(tasks) {
   filterItemUncompleted.innerText = tasks.filter(task => !task.isDone).length;
 }
 
-filterItemAll.addEventListener("click", async function () {
-
+filterItemAll.addEventListener("click", function () {
   localStorage.setItem("filtered-tasks-list", "filterItemAll");
   renderTasks();
 })
 
-filterItemCompleted.addEventListener("click", async function () {
+filterItemCompleted.addEventListener("click", function () {
   localStorage.setItem("filtered-tasks-list", "filterItemCompleted");
   renderTasks();
 })
 
-filterItemUncompleted.addEventListener("click", async function () {
+filterItemUncompleted.addEventListener("click", function () {
   localStorage.setItem("filtered-tasks-list", "filterItemUncompleted");
   renderTasks();
 })
@@ -156,12 +155,11 @@ filterItemUncompleted.addEventListener("click", async function () {
 function filterTasks(tasks) {
   const filteredTasks = localStorage.getItem("filtered-tasks-list");
   if (filteredTasks === "filterItemCompleted") {
-    const completedTasks = tasks.filter(task => task.isDone);
-    return completedTasks
+    return tasks.filter(task => task.isDone);
+
   }
   else if (filteredTasks === "filterItemUncompleted") {
-    const uncompletedTasks = tasks.filter(task => !task.isDone);
-    return uncompletedTasks
+    return tasks.filter(task => !task.isDone);
   } else {
     return tasks
   }

@@ -156,7 +156,6 @@ function filterTasks(tasks) {
   const filteredTasks = localStorage.getItem("filtered-tasks-list");
   if (filteredTasks === "filterItemCompleted") {
     return tasks.filter(task => task.isDone);
-
   }
   else if (filteredTasks === "filterItemUncompleted") {
     return tasks.filter(task => !task.isDone);

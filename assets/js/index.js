@@ -3,6 +3,9 @@ const addTaskInput = document.getElementById("add-task-input");
 const errorMessage = document.getElementById("error-message");
 const backendErrorMessage = document.getElementById("backend-error-message");
 const todoList = document.getElementById("todo-list");
+const filterStatusAll = document.getElementById("filter-status-all");
+const filterStatusCompleted = document.getElementById("filter-status-completed");
+const filterStatusUncompleted = document.getElementById("filter-status-uncompleted");
 const filterItemAll = document.getElementById("filter-item-all");
 const filterItemUncompleted = document.getElementById(
   "filter-item-uncompleted"
@@ -137,17 +140,17 @@ function updateUncompletedTasksCount(tasks) {
   filterItemUncompleted.innerText = `(${tasks.filter(task => !task.isDone).length})`;
 }
 
-filterItemAll.addEventListener("click", function () {
+filterStatusAll.addEventListener("click", function () {
   localStorage.setItem("filtered-tasks-list", "filterItemAll");
   renderTasks();
 })
 
-filterItemCompleted.addEventListener("click", function () {
+filterStatusCompleted.addEventListener("click", function () {
   localStorage.setItem("filtered-tasks-list", "filterItemCompleted");
   renderTasks();
 })
 
-filterItemUncompleted.addEventListener("click", function () {
+filterStatusUncompleted.addEventListener("click", function () {
   localStorage.setItem("filtered-tasks-list", "filterItemUncompleted");
   renderTasks();
 })

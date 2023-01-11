@@ -222,14 +222,10 @@ async function bindUpdateTextEvent() {
       const checkIcon = document.getElementById(`check-icon-${taskId}`);
       checkIcon.addEventListener("click", function () {
         const newValue = document.getElementById(`input-${taskId}`).value.trim();
-        if (newValue === "") {
-          renderTasks();
+        if (newValue !== todoText) {
+          editTodo(taskId, newValue)
         }
-        else if (newValue !== todoText) {
-          editTodo(taskId, newValue);
-        } else {
-          renderTasks();
-        }
+        renderTasks();
       })
       hideTodoItemIcons(taskId);
     })

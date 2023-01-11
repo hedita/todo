@@ -103,3 +103,7 @@ input {
   font-weight: bold;
   text-align: center;
 }
+
+.filter-item-uncompleted {
+  color: var(--secondary-color);
+}

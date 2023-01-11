@@ -104,6 +104,10 @@ input {
   text-align: center;
 }
 
-.filter-item-uncompleted {
+.filter-item-length {
   color: var(--secondary-color);
+}
+
+.filter-status {
+  font-weight: bold;
 }

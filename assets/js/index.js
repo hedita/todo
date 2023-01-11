@@ -110,8 +110,8 @@ function formatDate(date) {
 }
 
 function showTasks(tasks) {
-  // const orderedTasks = filterTasks(sortTasksByStatus(sortTasksByTime(tasks)));
-  todoList.innerHTML = sortTasksByStatus(sortTasksByTime(tasks)).map(({ text, createdAt, id: taskId, isDone, updatedAt }) =>
+  const orderedTasks = filterTasks(sortTasksByStatus(sortTasksByTime(tasks)));
+  todoList.innerHTML = orderedTasks.map(({ text, createdAt, id: taskId, isDone, updatedAt }) =>
     `<li id="${taskId}" class="todo-item">
     <input id="checkbox-${taskId}" class="task-item-checkbox" type="checkbox" ${isChecked(isDone)}/>
     <div id="todo-container-${taskId}">
@@ -208,18 +208,16 @@ async function bindUpdateTextEvent() {
       todoContainer.innerHTML = `<input id="input-${taskId}" type="text" value="${todoText}"/>
       <i id="check-icon-${taskId}" class="fa-solid fa-check check-icon"></i>`
       const checkIcon = document.getElementById(`check-icon-${taskId}`);
-      const newValue = document.getElementById(`input-${taskId}`).value.trim();
+      const newValue = document.getElementById(`input-${taskId}`);
       checkIcon.addEventListener("click", function () {
-        // if (newValue === "") {
-        //   todoContainer.innerHTML = todoText;
-        // }
-        // else if (newValue !== todoText) {
-        //   editTodo(taskId, newValue);
-        // } else {
-        //   renderTasks();
-        // }
-        console.log(newValue)
-
+        if (newValue.value.trim() === "") {
+          todoContainer.innerHTML = todoText;
+        }
+        else if (newValue.value.trim() !== todoText) {
+          editTodo(taskId, newValue.value);
+        } else {
+          renderTasks();
+        }
       })
       hideTodoItemIcons(taskId);
     })

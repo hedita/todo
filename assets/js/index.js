@@ -110,8 +110,8 @@ function formatDate(date) {
 }
 
 function showTasks(tasks) {
-  todoList.innerHTML = sortTasksByStatus(sortTasksByTime(tasks))
-    .map(({ text, createdAt, id: taskId, isDone, updatedAt }) =>
+  const todos = filterTasks(sortTasksByStatus(sortTasksByTime(tasks)));
+  todoList.innerHTML = todos.map(({ text, createdAt, id: taskId, isDone, updatedAt }) =>
     `<li id="${taskId}" class="todo-item">
     <input id="checkbox-${taskId}" class="task-item-checkbox" type="checkbox" ${isChecked(isDone)}/>
     <div id="todo-container-${taskId}">
@@ -135,6 +135,36 @@ function updateCompletedTasksCount(tasks) {
 
 function updateUncompletedTasksCount(tasks) {
   filterItemUncompleted.innerText = tasks.filter(task => !task.isDone).length;
+}
+
+filterItemAll.addEventListener("click", async function () {
+
+  localStorage.setItem("filtered-tasks-list", "filterItemAll");
+  renderTasks();
+})
+
+filterItemCompleted.addEventListener("click", async function () {
+  localStorage.setItem("filtered-tasks-list", "filterItemCompleted");
+  renderTasks();
+})
+
+filterItemUncompleted.addEventListener("click", async function () {
+  localStorage.setItem("filtered-tasks-list", "filterItemUncompleted");
+  renderTasks();
+})
+
+function filterTasks(tasks) {
+  const filteredTasks = localStorage.getItem("filtered-tasks-list");
+  if (filteredTasks === "filterItemCompleted") {
+    const completedTasks = tasks.filter(task => task.isDone);
+    return completedTasks
+  }
+  else if (filteredTasks === "filterItemUncompleted") {
+    const uncompletedTasks = tasks.filter(task => !task.isDone);
+    return uncompletedTasks
+  } else {
+    return tasks
+  }
 }
 
 function updateFilterCounts(tasks) {

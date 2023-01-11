@@ -126,15 +126,15 @@ function showTasks(tasks) {
 }
 
 function updateAllTasksCount(tasks) {
-  filterItemAll.innerText = tasks.length;
+  filterItemAll.innerText = `(${tasks.length})`;
 }
 
 function updateCompletedTasksCount(tasks) {
-  filterItemCompleted.innerText = tasks.filter(task => task.isDone).length;
+  filterItemCompleted.innerText = `(${tasks.filter(task => task.isDone).length})`;
 }
 
 function updateUncompletedTasksCount(tasks) {
-  filterItemUncompleted.innerText = tasks.filter(task => !task.isDone).length;
+  filterItemUncompleted.innerText = `(${tasks.filter(task => !task.isDone).length})`;
 }
 
 filterItemAll.addEventListener("click", function () {
@@ -208,13 +208,13 @@ async function bindUpdateTextEvent() {
       todoContainer.innerHTML = `<input id="input-${taskId}" type="text" value="${todoText}"/>
       <i id="check-icon-${taskId}" class="fa-solid fa-check check-icon"></i>`
       const checkIcon = document.getElementById(`check-icon-${taskId}`);
-      const newValue = document.getElementById(`input-${taskId}`);
       checkIcon.addEventListener("click", function () {
-        if (newValue.value.trim() === "") {
+        const newValue = document.getElementById(`input-${taskId}`).value.trim();
+        if (newValue === "") {
           todoContainer.innerHTML = todoText;
         }
-        else if (newValue.value.trim() !== todoText) {
-          editTodo(taskId, newValue.value);
+        else if (newValue !== todoText) {
+          editTodo(taskId, newValue);
         } else {
           renderTasks();
         }
